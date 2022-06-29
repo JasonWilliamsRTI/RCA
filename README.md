@@ -1,5 +1,7 @@
-psa2013 <img src="man/figures/200px-Rti-logo.png" align="right" />
+Reliable Component Analysis (RCA) of Cliff &amp; Caruso 1998 <img src="man/figures/200px-Rti-logo.png" align="right" />
 ========================================================
 
-# RelComp
-Reliable Component Analysis of Cliff &amp; Caruso 1998
+RCA was developed by RTI International to implement the Reliable Component 
+Analysis (RCA) of Cliff &amp; Caruso 1998
+
+## Installation
