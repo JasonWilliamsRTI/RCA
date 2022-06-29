@@ -22,9 +22,17 @@
 #' 
 #' @examples 
 #' 
+#' library(RCA)
+#' 
+#' # simulate example data 
 #' data(corr)
 #' data <- corrSim(corr)
 #' reliab <- c(.90, .89, .96, .86, .84, .82, .85, .76, .89, .68, .86)
+#' 
+#' # view the RelComp documentation
+#' ?RelComp
+#' 
+#' # run RelComp on the simulated data
 #' RelComp(data, names(data), reliab)
 #' 
 
