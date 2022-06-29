@@ -537,4 +537,4 @@ run;
 
 %mend;
 
-%RelComp(CC,5, .65, information digitspan vocab arith comp simil piccomp picarr block objass digsym, .90 .89 .96 .86 .84 .82 .85 .76 .89 .68 .86);
+%RelComp(CC,5, .70, information digitspan vocab arith comp simil piccomp picarr block objass digsym, .90 .89 .96 .86 .84 .82 .85 .76 .89 .68 .86);

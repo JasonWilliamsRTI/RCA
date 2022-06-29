@@ -29,7 +29,7 @@
 #' 
 
 RelComp <- function(data, varlist, reliab, 
-                    retain=5, criterion=.65, 
+                    retain=5, criterion=.70, 
                     method = "pearson", use = "pairwise.complete.obs")
 {
   
