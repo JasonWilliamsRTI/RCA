@@ -9,13 +9,14 @@ Analysis (RCA) of Cliff &amp; Caruso (1998).
 Go to [https://github.com/ICTatRTI/RCA/tags](https://github.com/ICTatRTI/RCA/tags)
 and click on the top most `tar.gz` link to download the newest version of the `RCA` package.
 
+
 In R, use
 
 ```
 install.packages("path/to/RCA-0.1.0.tar.gz", repos = NULL, type = "source")
 ```
 
-substituting the path where you saved the `tar.gz` file.
+substituting the path where you saved the `tar.gz` file. 
 
 ## Simulated Data Example
 
