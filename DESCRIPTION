@@ -12,8 +12,8 @@ License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R (>= 2.10)
-Imports:
+    R (>= 2.10),
     MASS,
     geigen
+Imports:
 RoxygenNote: 7.1.2

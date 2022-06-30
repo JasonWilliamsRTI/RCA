@@ -18,7 +18,10 @@
 #'  
 #' @param use See \code{\link{cor}}.
 #' 
+#' @param file Character. File name with an'.txt' extention for saving output.
+#' 
 #' @import geigen
+#' @export
 #' 
 #' @examples 
 #' 
@@ -33,12 +36,17 @@
 #' ?RelComp
 #' 
 #' # run RelComp on the simulated data
-#' RelComp(data, names(data), reliab)
+#' output <- RelComp(data, names(data), reliab)
+#' 
+#' # view reliabilities
+#' output$reliabilities
 #' 
 
 RelComp <- function(data, varlist, reliab, 
                     retain=5, criterion=.70, 
-                    method = "pearson", use = "pairwise.complete.obs")
+                    method = "pearson", 
+                    use = "pairwise.complete.obs",
+                    file = "RelCompOutput.txt")
 {
   
   # estimate the correlation matrix from the data
@@ -109,11 +117,33 @@ RelComp <- function(data, varlist, reliab,
   wgtrotnonorm <- weights_nonorm_sub_rot
   wgtrotnormed <- wgtrotnormed
   
-  # resume step 13 from the sas file here
+  sink(file=file)
+  # printed output
+  print('RCA component reliability estimates')
+  print(relrot)
+  print('')
   
-  # placeholder for returns
-  message("you have reached the end, nothing is returned yet")
+  print('Table of non-normed RCA weights for each component')
+  print(wgtrotnonorm)
+  print('')
   
+  print('Table of normalized RCA weights for each component')
+  print(wgtrotnormed)
+  print('')
+  
+  print('Table of orthogonally rotated and normed RCA weights for retained components')
+  print(wgtrotnormed)
+  print('')
+  
+  print('Table of orthogonally rotated loadings for retained components')
+  print(loadsrot)
+  print('')
+  
+  sink()
+  
+  # returned output
+  list(reliabilities=relrot, wgtrotnonorm=wgtrotnonorm,
+       wgtrotnormed=wgtrotnormed, loadsrot=loadsrot)
 }
 
 
