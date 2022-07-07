@@ -25,9 +25,11 @@
 #' 
 #' @examples 
 #' 
+#' # Replicate the analyses of Cliff and Caruso (1998)
+#' 
 #' library(RCA)
 #' 
-#' # simulate example data 
+#' # simulate data using the Cliff and Caruso (1998) correlation matrix
 #' data(corr)
 #' data <- corrSim(corr)
 #' reliab <- c(.90, .89, .96, .86, .84, .82, .85, .76, .89, .68, .86)
@@ -38,8 +40,9 @@
 #' # run RelComp on the simulated data
 #' output <- RelComp(data, names(data), reliab)
 #' 
-#' # view reliabilities
-#' output$reliabilities
+#' # view the reliabilities, compare to the first row in Table 8 of 
+#' # Cliff and Caruso (1998)
+#' round(output$reliabilities[1:5], 3)
 #' 
 
 RelComp <- function(data, varlist, reliab, 
@@ -142,7 +145,7 @@ RelComp <- function(data, varlist, reliab,
   sink()
   
   # returned output
-  list(reliabilities=relrot, wgtrotnonorm=wgtrotnonorm,
+  list(reliabilities=reliabilities, wgtrotnonorm=wgtrotnonorm,
        wgtrotnormed=wgtrotnormed, loadsrot=loadsrot)
 }
 

@@ -21,7 +21,11 @@ substituting the path where you saved the `tar.gz` file.
 ## Simulated Data Example
 
 ```
-# simulate example data 
+# Replicate the analyses of Cliff and Caruso (1998)
+
+library(RCA)
+
+# simulate data using the Cliff and Caruso (1998) correlation matrix
 data(corr)
 data <- corrSim(corr)
 reliab <- c(.90, .89, .96, .86, .84, .82, .85, .76, .89, .68, .86)
@@ -30,7 +34,11 @@ reliab <- c(.90, .89, .96, .86, .84, .82, .85, .76, .89, .68, .86)
 ?RelComp
 
 # run RelComp on the simulated data
-RelComp(data, names(data), reliab)
+output <- RelComp(data, names(data), reliab)
+
+# view the reliabilities, compare to the first row in Table 8 of 
+# Cliff and Caruso (1998)
+round(output$reliabilities[1:5], 3)
 ```
 
 ## Real Data Example
