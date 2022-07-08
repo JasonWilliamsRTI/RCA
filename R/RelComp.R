@@ -20,6 +20,9 @@
 #' 
 #' @param file Character. File name with an'.txt' extention for saving output.
 #' 
+#' @prama digits Integer. The number of decimal places for printing output. The 
+#' default is 3.
+#' 
 #' @import geigen
 #' @export
 #' 
@@ -49,7 +52,8 @@ RelComp <- function(data, varlist, reliab,
                     retain=5, criterion=.70, 
                     method = "pearson", 
                     use = "pairwise.complete.obs",
-                    file = "RelCompOutput.txt")
+                    file = "RelCompOutput.txt",
+                    digits = 3)
 {
   
   # estimate the correlation matrix from the data
@@ -120,33 +124,38 @@ RelComp <- function(data, varlist, reliab,
   wgtrotnonorm <- weights_nonorm_sub_rot
   wgtrotnormed <- wgtrotnormed
   
+  # name outputs
+  colnames(weights_nonorm) <- paste("COMP", 1:ncol(weights_nonorm), "WGT", sep="")
+  colnames(weights_nonorm_sub_rot) <- paste("COMP", 
+                                            1:ncol(weights_nonorm_sub_rot), 
+                                            "ROTNONORM_WGHT", sep="") 
+  colnames(loadsrot) <- paste("COMP", 
+                              1:ncol(loadsrot), 
+                              "ROT_LOAD", sep="") 
+  
   sink(file=file)
   # printed output
   print('RCA component reliability estimates')
-  print(relrot)
+  print(reliabilities, digits = digits)
   print('')
   
-  print('Table of non-normed RCA weights for each component')
-  print(wgtrotnonorm)
+  print('Table of RCA weights for each component')
+  print(weights_nonorm, digits = digits)
   print('')
-  
-  print('Table of normalized RCA weights for each component')
-  print(wgtrotnormed)
-  print('')
-  
+
   print('Table of orthogonally rotated and normed RCA weights for retained components')
-  print(wgtrotnormed)
+  print(weights_nonorm_sub_rot, digits = digits)
   print('')
   
   print('Table of orthogonally rotated loadings for retained components')
-  print(loadsrot)
+  print(loadsrot, digits = digits)
   print('')
   
   sink()
   
   # returned output
-  list(reliabilities=reliabilities, wgtrotnonorm=wgtrotnonorm,
-       wgtrotnormed=wgtrotnormed, loadsrot=loadsrot)
+  list(reliabilities=reliabilities, weights_nonorm=weights_nonorm,
+       weights_nonorm_sub_rot=weights_nonorm_sub_rot, loadsrot=loadsrot)
 }
 
 

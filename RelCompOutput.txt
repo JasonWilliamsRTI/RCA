@@ -1,42 +1,30 @@
 [1] "RCA component reliability estimates"
-            [,1]        [,2]        [,3]
-[1,]  0.81799609 -0.06236565  0.09652110
-[2,] -0.03601345  0.82246603 -0.03850059
-[3,]  0.05144424 -0.03553552  0.78108744
+[1] 0.913 0.782 0.727 0.675 0.567 0.396
 [1] ""
-[1] "Table of non-normed RCA weights for each component"
-                       [,1]        [,2]        [,3]
-Arr_PrpCorSwitch -0.2059900 -1.01536230 -0.10842612
-SSG_PrpCor       -0.1619414  0.11234126  1.07722495
-Pig_PrpCorNo      0.7209158  0.07967135 -0.29322144
-Hse_PrpCor        0.2823958  0.09332415  0.01743648
-PTP_PrpCor        0.2388706  0.05891597  0.03119690
-STSpart1          0.2448216 -0.14185186 -0.07066292
-[1] ""
-[1] "Table of normalized RCA weights for each component"
-                      [,1]        [,2]        [,3]
-Arr_PrpCorSwitch 0.1739490 -1.00000000  0.13543309
-SSG_PrpCor       0.2127342 -0.16178272  1.00000000
-Pig_PrpCorNo     1.0000000 -0.12242293 -0.05774180
-Hse_PrpCor       0.4236486 -0.02283427  0.09221907
-PTP_PrpCor       0.3778835 -0.04689444  0.10107025
-STSpart1         0.4489207 -0.23800879  0.06328297
+[1] "Table of RCA weights for each component"
+                 COMP1WGT COMP2WGT COMP3WGT COMP4WGT COMP5WGT COMP6WGT
+Arr_PrpCorSwitch    0.373  -0.9720    0.035   -0.296   0.1064   -0.107
+SSG_PrpCor          0.379   0.3831    0.953   -0.074  -0.2809    0.155
+Pig_PrpCorNo        0.281   0.2869   -0.671   -0.423  -0.7239    0.211
+Hse_PrpCor          0.143   0.2084   -0.158   -0.217   0.9433    0.493
+PTP_PrpCor          0.140   0.1652   -0.121    0.117   0.2500   -1.129
+STSpart1            0.204  -0.0333   -0.206    1.005  -0.0322    0.392
 [1] ""
 [1] "Table of orthogonally rotated and normed RCA weights for retained components"
-                      [,1]        [,2]        [,3]
-Arr_PrpCorSwitch 0.1739490 -1.00000000  0.13543309
-SSG_PrpCor       0.2127342 -0.16178272  1.00000000
-Pig_PrpCorNo     1.0000000 -0.12242293 -0.05774180
-Hse_PrpCor       0.4236486 -0.02283427  0.09221907
-PTP_PrpCor       0.3778835 -0.04689444  0.10107025
-STSpart1         0.4489207 -0.23800879  0.06328297
+                 COMP1ROTNONORM_WGHT COMP2ROTNONORM_WGHT COMP3ROTNONORM_WGHT
+Arr_PrpCorSwitch              -0.206             -1.0154             -0.1084
+SSG_PrpCor                    -0.162              0.1123              1.0772
+Pig_PrpCorNo                   0.721              0.0797             -0.2932
+Hse_PrpCor                     0.282              0.0933              0.0174
+PTP_PrpCor                     0.239              0.0589              0.0312
+STSpart1                       0.245             -0.1419             -0.0707
 [1] ""
 [1] "Table of orthogonally rotated loadings for retained components"
-                      [,1]        [,2]       [,3]
-Arr_PrpCorSwitch 0.1202165 -0.97297539 0.12384743
-SSG_PrpCor       0.2559048 -0.15774230 0.94556224
-Pig_PrpCorNo     0.8802863 -0.14633108 0.02679737
-Hse_PrpCor       0.5918926 -0.03606412 0.22210660
-PTP_PrpCor       0.6140536 -0.09670300 0.26672579
-STSpart1         0.4810255 -0.35614509 0.13431585
+                 COMP1ROT_LOAD COMP2ROT_LOAD COMP3ROT_LOAD
+Arr_PrpCorSwitch         0.120       -0.9730        0.1238
+SSG_PrpCor               0.256       -0.1577        0.9456
+Pig_PrpCorNo             0.880       -0.1463        0.0268
+Hse_PrpCor               0.592       -0.0361        0.2221
+PTP_PrpCor               0.614       -0.0967        0.2667
+STSpart1                 0.481       -0.3561        0.1343
 [1] ""

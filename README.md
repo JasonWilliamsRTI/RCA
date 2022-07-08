@@ -18,11 +18,11 @@ install.packages("path/to/RCA-0.1.0.tar.gz", repos = NULL, type = "source")
 
 substituting the path where you saved the `tar.gz` file. 
 
-## Simulated Data Example
+## Replicate the analyses of Cliff and Caruso (1998)
+
+### RCA R Package
 
 ```
-# Replicate the analyses of Cliff and Caruso (1998)
-
 library(RCA)
 
 # simulate data using the Cliff and Caruso (1998) correlation matrix
@@ -41,6 +41,11 @@ output <- RelComp(data, names(data), reliab)
 round(output$reliabilities[1:5], 3)
 ```
 
-## Real Data Example
+### SAS
 
--- pending --
+After installing the `RCA` `R` package, navigate to the installation folder and
+find the "\inst\SAS" subfolder which contains the file 
+
+`RelComp Macro C&C 98 example.sas`
+
+which can be used to replicate the the analyses of Cliff and Caruso (1998).

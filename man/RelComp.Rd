@@ -12,7 +12,8 @@ RelComp(
   criterion = 0.7,
   method = "pearson",
   use = "pairwise.complete.obs",
-  file = "RelCompOutput.txt"
+  file = "RelCompOutput.txt",
+  digits = 3
 )
 }
 \arguments{
