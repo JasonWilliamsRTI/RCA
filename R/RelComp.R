@@ -30,7 +30,7 @@
 #' 
 #' # Replicate the analyses of Cliff and Caruso (1998)
 #' 
-#' library(RCA)
+#' library(RelComp)
 #' 
 #' # simulate data using the Cliff and Caruso (1998) correlation matrix
 #' data(corr)
@@ -70,10 +70,15 @@ RelComp <- function(data, varlist, reliab,
   # normed to have sum of squared elements = 1
   reliabilities   <- geigen(rstar, corr)
   weights_nonorm  <- reliabilities$vectors
-  weights_nonorm  <- -1*weights_nonorm[,ncol(weights_nonorm):1] #TODO: jason sending output, why columns not all -1*?
+  weights_nonorm  <- -1*weights_nonorm[,ncol(weights_nonorm):1] 
   reliabilities   <- rev( reliabilities$values )
   
   nvar <- nrow(weights_nonorm)
+  
+  # alternative method to derive weight_nonorm
+  F <- chol(solve(corr))
+  A <- F %*% rstar %*% t(F)
+  weight_nonorm_a <- t(F) %*% eigen(A)$vectors
   
   # normed weights
   weights_normed <- weights_nonorm

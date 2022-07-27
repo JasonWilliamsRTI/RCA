@@ -23,7 +23,7 @@ substituting the path where you saved the `tar.gz` file.
 ### RCA R Package
 
 ```
-library(RCA)
+library(RelComp)
 
 # simulate data using the Cliff and Caruso (1998) correlation matrix
 data(corr)
@@ -43,7 +43,7 @@ round(output$reliabilities[1:5], 3)
 
 ### SAS
 
-After installing the `RCA` `R` package, navigate to the installation folder and
+After installing the `RelComp` `R` package, navigate to the installation folder and
 find the "\inst\SAS" subfolder which contains the file 
 
 `RelComp Macro C&C 98 example.sas`

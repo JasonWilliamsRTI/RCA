@@ -1,4 +1,4 @@
-Package: RCA
+Package: RelComp
 Type: Package
 Title: Reliable Component Analysis (RCA) of Cliff &amp; Caruso (1998).
 Version: 0.1.1
