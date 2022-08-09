@@ -1,30 +1,92 @@
-/*Reliable Component Analysis*/
 /*
-Distributed Version 1.0
-July 28 2022
+This version of the Reliable Components Analysis program recreates tables from Cliff and Caruso (1998).
 
-usage:
-%include PATH/RelComp.sas
-%RELCOMP(dataset, set # of components retained, # of components retained by reliability cutoff criterion, variables, reliabilities)
+/*
 
-as:
-%macro RelComp(dataset, retain, criterion, varlist, reliab);
+%RELCOMP(dataset, ,# of components retained, reliability cutoff value for retained components, variables, reliabilities)
 
-The "criterion" value is set to 1 if specifying a set number of components to retain. Any entry of 0 to less than 1 will override
-the "retain" variable and use the cutoff specified to retain the number of components with unrotated reliability estimates greater
-than or equal to the criterion.
-
-
-RelComp outputs:
-1) column of k orthogonal unrotated component reliabilites where k = number of items/scores 
-2) column of j retained orthogonal rotated reliabilites 
-3) Matrix of k weight vectors (columns) 
-4) Matrix of j rotated weight vectors (columns) for retained composites
-5) Matrix of j rotated loadings vectors(columns) for retained composites
-6) Adds composites scores for j retained components using rotated weights 
-	(1 per component, variables added to dataset are named RELCOMPx)
+If the cutoff value is set to 1 then the number of components value is used, otherwise retention is based on the reliability cutoff.
 
 */
+
+
+/***********************************************************************************************/
+/***********************************************************************************************/
+/*SECTION 1. Data simulation for data corresponding to that reported in Cliff and Caruso (1998)
+
+Data are generated using the correlations in Table x, page X as population values.
+
+/***********************************************************************************************/
+/***********************************************************************************************/
+
+proc iml;
+
+/****************************************************/
+/* 1) correlations from C and C to use as pop values
+/****************************************************/
+
+CORR=
+{
+1	0.5	0.83	0.66	0.68	0.62	0.55	0.55	0.6	0.45	0.43,
+0.5	1	0.54	0.55	0.48	0.4	0.41	0.36	0.46	0.29	0.36,
+0.83	0.54	1	0.65	0.74	0.68	0.57	0.58	0.58	0.46	0.45,
+0.66	0.55	0.65	1	0.59	0.55	0.51	0.46	0.6	0.43	0.4,
+0.68	0.48	0.74	0.59	1	0.61	0.56	0.52	0.49	0.4	0.45,
+0.62	0.4	0.68	0.55	0.61	1	0.58	0.49	0.55	0.45	0.44,
+0.55	0.41	0.57	0.51	0.56	0.58	1	0.55	0.6	0.63	0.43,
+0.55	0.36	0.58	0.46	0.52	0.49	0.55	1	0.55	0.45	0.39,
+0.6	0.46	0.58	0.6	0.49	0.55	0.6	0.55	1	0.66	0.42,
+0.45	0.29	0.46	0.43	0.4	0.45	0.63	0.45	0.66	1	0.25,
+0.43	0.36	0.45	0.4	0.45	0.44	0.43	0.39	0.42	0.25	1
+}
+;
+
+/*************************/
+/* 2) name, means, and N 
+/*************************/
+varNames = {information digitspan vocab arith comp simil piccomp picarr block objass digsym};
+Mean = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; /* population means */
+N = 1000000; /* sample size */
+
+
+/*************************/
+/* 3) simulate data
+/*************************/
+
+call randseed(123);
+X = RandNormal(N, Mean, Corr); /* x is a 1000 x 3 matrix */
+SampleMean = mean(X);
+SampleCorr = corr(X);
+
+/*************************/
+/* 4) verify data
+/*************************/
+print corr samplecorr[colname=varNames rowname=VarNames];
+print samplemean     [colname=varNames];
+
+/*****************************/
+/* 5) output dataset for RCA
+/*****************************/
+create CC from X[colname=varNames]; append from X; close;
+quit;
+
+proc contents data=CC; run;
+proc corr data=CC; run;
+
+
+/*******************************************************************************************/
+/*******************************************************************************************/
+/*END Data simulation
+/*******************************************************************************************/
+/*******************************************************************************************/
+
+
+/**************************************************************************************************************************/
+/**************************************************************************************************************************/
+/**************************************************************************************************************************/
+/**************************************************************************************************************************/
+/**************************************************************************************************************************/
+/**************************************************************************************************************************/
 
 
 /*******************************************************************************************/
@@ -34,6 +96,7 @@ RelComp outputs:
 /*******************************************************************************************/
 
 /*macro */
+
 %macro RelComp(dataset, retain, criterion, varlist, reliab);
 
 /********************************/
@@ -41,7 +104,7 @@ RelComp outputs:
 /********************************/
 
 ODS EXCLUDE ALL;
-proc corr data=&dataset nomiss; var &varlist;
+proc corr data=&dataset; var &varlist;
 ods output PearsonCorr=corrs;
 run;
 
@@ -373,18 +436,18 @@ drop nob; rename varname = Variable; run;
 title1 'RCA component reliability estimates';
 proc print label noobs data=_reliabilities; run;
 title1;
-title1 'Table of RCA weights for each component';
+title1 'Table of non-normed RCA weights for each component';
 proc print noobs data=_weights_nonorm_out; run;
 title1;
-/*title1 'Table of normalized RCA weights for each component';
+title1 'Table of normalized RCA weights for each component';
 proc print noobs data=_weights_normed_out; run;
-title1;*/
+title1;
 title1 'Table of orthogonally rotated RCA weights for retained components';
 proc print noobs data=wgtrotnonorm_out; run;
 title1;
-/*title1 'Table of orthogonally rotated and normed RCA weights for retained components';
+title1 'Table of orthogonally rotated and normed RCA weights for retained components';
 proc print noobs data=wgtrotnormed_out; run;
-title1;*/
+title1;
 title1 'Table of orthogonally rotated loadings for retained components';
 proc print noobs data=_loadsrot_out; run;
 title1;
@@ -432,10 +495,8 @@ run;
 %end;
 
 /******************************************************************/
-/*16)standardize Xs for composites, remove incomplete cases       */
+/*16)standardize Xs for composites                                */
 /******************************************************************/
-
-data &dataset.RCA; set &dataset.RCA; if nmiss(of &VARLIST) gt 0 then delete; run;
 
 proc stdize data=&dataset.RCA out=_temp method=STD SPREFIX=std OPREFIX ; var &varlist; run;
 
@@ -476,4 +537,4 @@ run;
 
 %mend;
 
-
+%RelComp(CC,5, .65, information digitspan vocab arith comp simil piccomp picarr block objass digsym, .90 .89 .96 .86 .84 .82 .85 .76 .89 .68 .86);
