@@ -1,5 +1,10 @@
 /*
-This version of the Reliable Components Analysis program recreates tables from Cliff and Caruso (1998).
+This version of the Reliable Components Analysis program recreates tables from 
+
+Cliff, N., & Caruso, J. C. (1998). Reliable component analysis through maximizing composite reliability. 
+Psychol Methods, 3(3), 291-308. doi: 10.1037/1082-989X.3.3.291
+
+
 
 /*
 
